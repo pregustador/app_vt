@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <!--Set view to make mobile responsive-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+    <!--Leaflet referenced tags -->
+    <link rel="stylesheet" href="../static/css/leaflet.css">
+    <script src="../static/js/leaflet.js"></script>
+    <script src="../static/js/leaflet.ajax.js"></script>
+
+    <!--Leaflet Easy Buttom referenced tags -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script> -->
+    <link rel="stylesheet" href="../static/css/easy-button.css">
+    <script src="../static/js/easy-button.js"></script>
+
+    <!--React referenced tags -->
+    <!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+    <script src="../static/js/react.development.js"></script>
+    <script src="../static/js/react-dom.development.js"></script>
+
+    <!--Jquery referenced tags-->
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+
+    <!--Turf referenced tags-->
+    <script src="../static/js/turf.min.js"></script>
+
+    <!--Plotly referenced tags-->
+    <script src="../static/js/plotly-latest.min.js"></script>
+
+    <!--Create Plotly Component referenced tags -->
+    <!-- <script crossorigin src="https://unpkg.com/react-plotly.js@2.2.0/dist/create-plotly-component.js"></script> -->
+    <script src="../static/js/create-plotly-component.js"></script>
+
+    <!--Main CSS-->
+    <link rel="stylesheet" href="../static/css/main.css">
+
+    <!--Fonts google-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!--Title website/pwa-->
+    <title>TG_PROJETO</title>
+
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="div_navbar">
+      <!-- Navbar group -->
+      <div class="div_navbar-group">
+        <!-- Navbar group content-->
+        <span class="div_map div_navbar-group-content">MAPA</span>
+        <span class="div_dem div_navbar-group-content">TIN 3D</span>
+        <span class="div_path div_navbar-group-content">VIA</span>
+        <span class="div_info div_navbar-group-content">INFO</span>
+        <span class="div_navbar-group-content">FONTE</span>
+      </div>
+    </div>
+
+    <!--Base div created in main.css when we disable interate on map-->
+    <div class="div_base"></div>
+
+    <!--Top side div -->
+    <div class="div_sidebar-top"></div>
+
+    <!--Side div (bottom side div) -->
+    <div class="div_sidebar"></div>
+
+    <!-- Side bar group -->
+    <div class="div_sidebar-group">
+      <!-- Side bar content -->
+      <div class="div_map div_sidebar-group-content">&nbsp &nbsp MAPA</div>
+      <div class="div_dem div_sidebar-group-content">&nbsp &nbsp TIN 3D</div>
+      <div class="div_path div_sidebar-group-content">&nbsp &nbsp VIA</div>
+      <div class="div_info div_sidebar-group-content">&nbsp &nbsp INFO</div>
+      <div class="div_sidebar-group-content">&nbsp &nbsp FONTE</div>
+    </div>
+
+    <!--Menu buttom-->
+    <div class="div_menu-button"></div>
+
+    <!--Menu title-->
+    <div class="div_menu-title">app-vt</div>
+
+    <!--Map div-->
+    <div id="map"></div>
+
+    <!-- Div for  PATH -->
+    <div id="path" class="div_content">
+      <div id="path-top" class="div_content-top"><p class="paragraph_right"> Via &nbsp &nbsp</p></div>
+      <div id="path-content" class="div_content-content"></div>
+    </div>
+
+    <!-- Div for  DEM -->
+    <div id="dem" class="div_content">
+      <div id="dem-top" class="div_content-top"><p class="paragraph_right"> Tin3D &nbsp &nbsp</p></div>
+      <div id="dem-content" class="div_content-content"></div>
+    </div>
+
+    <!-- Div for  INFO -->
+    <div id="info" class="div_content">
+      <div id="info-top" class="div_content-top"><p class="paragraph_right"> Info &nbsp &nbsp</p></div>
+      <div id="info-content" class="div_content-content">
+        <center>
+          <a href="#mde_info">MDE, </a>
+          <a href="#tin_info"> TIN, </a>
+          <a href="#via_info"> VIA </a>
+        </center>
+        <br>
+        <hr>
+        <section id="mde_info">
+          <h3> MDE </h3>
+          <h4> O que é MDE, MDS e MDT? </h4>
+          O serviço de Pesquisa Geológica dos Estados Unidos (do ingles: <em>United States Geological
+          Survey <a href="https://www.usgs.gov/faqs/what-difference-between-a-dem-and-a-dsm">
+          </em> - USGS</a> ) nos informa sobre as diferenças entre algumas modelagens de terreno
+          do seguinte modo:
+          <ul>
+            <li> O Modelo Digital de Elevevação ou MDE (do inglês: <em>Digital Elevation Model</em> - DEM) é uma
+            é uma representação do terreno (terra nua) com elevações em intervalos regularmente espaçados;</li>
+            <p></p>
+            <li> Um Modelo Digital de Superfície ou MDS ( do inglês: <em>Digital SurfaceModel</em> - DSM)
+            também contém elevações em intervalos regularmente espaçados, contudo as elevações representam
+            a primeira superfície refletida detectada pelo sensor, assim, esses primeiros retornos podem
+            ser refletidos pelo solo nu ou por características da superfície, como árvores e estruturas.</li>
+          </ul>
+          No Brasil, de acordo com <a href="http://www.clickgeo.com.br/qual-e-a-diferenca-entre-mde-mdt-e-mds/">
+          Anderson Medeiros</a>, utlizamos o conceito do MDE e MDT (Modelo Digital de Terreno,
+          ou do inglês: <em>Digital Terrain Model</em> - DTM) como sinônimos.
+          <p>
+          A Figura 1 a seguir ilustra a diferença entre os modelos DEM e DSM:
+          </p>
+          <p></p>
+          <center>
+            <img class="dem_via_img" src="../static/css/images/mde_mds_img.jpg" alt="img_difference_DTM_DSM">
+            <p></p>
+            Fonte-imagem: <a href="https://tecterra.com.br/altimetria-curvas-de-nivel/">tecterra.com.br</a>
+          </center>
+        </section>
+        <hr>
+
+        <section id="via_info">
+          <h3> VIA </h3>
+          De acordo com o Instituto Brasileiro de Geografia e Estatística (<a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">
+          IBGE </a>), o perfil é a representação em termos cartográficos de uma seção vertical da superfície terrestre. Assim,
+          inicialmente precisa-se conhecer as altitudes de um determinado número de pontos e a distância entre eles. A figura 2
+          abaixo mostra a representação do perfil topográfico de acordo com uma seção traçada entre as curvas de nível:
+          <center>
+            <img  class="dem_via_img" src="../static/css/images/perfil_ibge.gif" alt="img_perfil_IBGE">
+            <!--end. img: https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/imagens/Image184.gif-->
+            <p></p>
+            Fonte-imagem: <a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">IBGE</a>
+          </center>
+          <h4> Como é gerado o Perfil aqui? </h4>
+          A ideia é gerar a seção através do caminho percorrido pelo usuário por meio de suas coordenadas, estas são fornecidas
+          a cada 30 segundos pelo sistema de posicionamento do despositivo, clicando-se na ferramenta indicada (utilizar a
+          aba ajuda para saber como usar). Deste modo, o usuário saberá qual foi a altitude de seus pontos de localização em
+          comparação com a distância percorrida.
+        </section>
+
+      </div>
+    </div>
+
+    <!--Main javascript-->
+    <script type="text/javascript" src="../static/js/main.js"></script>
+
+  </body>
+</html>
