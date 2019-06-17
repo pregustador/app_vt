@@ -56,15 +56,20 @@ def graphic():
 
             def animate(i):
                 # azimuth angle : 0 deg to 360 deg
-                ax.view_init(elev=10, azim=i*4)
-
+                # ax.view_init(elev=10, azim=i*4)
+                ax.view_init(elev=10, azim=i*4*3)
                 return fig,
 
-            # Animate
+            # Animate azim=i*4 frames=90 fps=30 interval=50
             ani = animation.FuncAnimation(fig, animate, init_func=init,
-                                            frames=90, interval=50, blit=True)
-            ani.save('tmp/imgdem.gif', writer='imagemagick', fps=30)
+                                            frames=30, interval=50, blit=True)
+            ani.save('tmp/imgdem.gif', writer='imagemagick', fps=10)
+
             # ani.save('tmp/imgdem_.mp4', fps=30)
+            # ani = animation.FuncAnimation(fig, animate, init_func=init,interval=30)
+            # writer = animation.writers['ffmpeg'](fps=30)
+            # ani.save('tmp/imgdem.mp4',writer=writer,dpi=dpi)
+
 
 
             # buf = io.BytesIO()
@@ -75,6 +80,7 @@ def graphic():
             # return jsonify(html=uri)
 
             image = open('tmp/imgdem.gif', 'rb') #open binary file in read mode
+            # image = open('tmp/imgdem.mp4', 'rb') #open binary file in read mode
             image_read = image.read()
             image_64_encode = base64.encodestring(image_read)
             uri = urllib.parse.quote(image_64_encode)
