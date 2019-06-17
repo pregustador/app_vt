@@ -119,5 +119,6 @@ def static_geojson_stabranca_pt():
 
 # It's just to work https
 if __name__ == "__main__":
-    app.run(ssl_context='adhoc',host='0.0.0.0')
+    app.run(port=5000, debug=True)
+    # app.run(ssl_context='adhoc',host='0.0.0.0')
     # app.run(ssl_context='adhoc')
