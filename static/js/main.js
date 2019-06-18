@@ -1,18 +1,32 @@
+// ------------- Service Registration--------------------------------------------
+//
+if('serviceWorker' in navigator) {
+    try {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(function() { console.log("Service Worker Registered"); });
+    } catch {
+        console.log("Service Worker Not Registered");
+    }
+}
+
 
 // ------------- GLOBAL VARIABLES --------------------------------------------
-
 
 // ###  Global Variables: Urls, Atributtions  ################################
 
 // Use OpenStreetMap url and variable osmAttrib as link atributtion
 var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  // only  request tiles from the 'a' subdomain, as that is cached I can use osmUrlOffinstead osmUrl
+  osmUrlOff = 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
 	osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	osm = L.tileLayer(osmUrl, {maxZoom: 16,minZoom: 10, attribution: osmAttrib}); // initial layer
+  // osm = L.tileLayer(osmUrl, {maxZoom: 16,minZoom: 10, attribution: osmAttrib}); // initial layer
+  osm = L.tileLayer(osmUrlOff, {maxZoom: 16,minZoom: 1, attribution: osmAttrib}); // initial layer
 
 // Use OpenTopoMap url and variable otpAttrib as link atributtion
 var otpUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 	otpAttrib = '&copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors',
-	otp = L.tileLayer(otpUrl, {maxZoom: 16,minZoom: 10, attribution: otpAttrib}); // initial layer
+	otp = L.tileLayer(otpUrl, {maxZoom: 16,minZoom: 1, attribution: otpAttrib}); // initial layer
 
 
 // ### Global Variables: Bounds and Map Variable   ###########################
@@ -25,9 +39,9 @@ var bounds = new L.LatLngBounds(new L.LatLng(-23.4482,-46.2100), new L.LatLng(-2
 var map = new L.Map('map', {
     measureControl: true,
   	center: bounds.getCenter(),
-  	zoom: 12,
+  	zoom: 5,
   	layers: [osm],
-  	// maxBounds: bounds
+  	// maxBounds: bounds ... [osm]
 });
 
 
@@ -157,6 +171,18 @@ var changeData = L.Control.extend({
 			container.style.borderColor = "rgba(180, 180, 180, 0.9)";
 			container.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
 	    container.onclick = function(){
+        if (containerLoc) {
+          containerLoc.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+          containerLoc.style.borderColor = "rgba(180, 180, 180, 0.9)";
+          removeAllLayers();
+          refreshLocVariables();
+        };
+        if (containerNav) {
+          containerNav.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+          containerNav.style.borderColor = "rgba(180, 180, 180, 0.9)";
+          removeAllLayers();
+          refreshNavVariables();
+        };
 				$( "body" ).append( change_data_select );
 				$("#city, #city-top, .div_load_top, .div_load, .div_out, .div_out_top" ).fadeIn();
 				$("#city").css({"background-color":"rgba(255, 255, 255, 0.9)","border":"1px solid rgba(65, 89, 66, 0.5)"});
@@ -175,7 +201,7 @@ var changeData = L.Control.extend({
 	  }
 });
 
-var containerLoc;
+var containerLoc = false;
 var keyLocLocation = false;
 
 var myLocation = L.Control.extend({
@@ -224,7 +250,7 @@ var myLocation = L.Control.extend({
 var imageBackgroundNav = 'url(../static/css/images/baseline_replay_30_black_36dp.png) no-repeat';
 var keyNavLocation = false;
 var nav_interval = false;
-var containerNav;
+var containerNav = false;
 
 var navigation = L.Control.extend({
   options: { position: 'bottomright'},
@@ -279,7 +305,7 @@ navigation = new navigation();
 
 var easy_button = L.easyButton('<img style="width: 16px; height: 16px;" src="../static/css/images/baseline_code_black_24dp.png">',
               function () {
-								myLocFunc();
+								window.location='https://github.com/pregustador/app_vt';
 							}, 'Code');
 
 
@@ -477,7 +503,7 @@ function grabDataCity(city) {
 	});
 	setTimeout(function() {
 		removeLoader();
-	}, 20000);
+	}, 30000);
 
 }
 
@@ -602,6 +628,10 @@ function removeAllLayers() {
 // locFunc function used to read json, put information, retrieve information
 function locFunc(positions){
 	targetPoint = turf.point([positions['lng'],positions['lat']]);
+	// if (navigator.online){
+  //   //manipulate the DOM
+	// 	map.setView([positions['lat'],positions['lng']], 14);
+  // }
 	map.setView([positions['lat'],positions['lng']], 14);
 
 	nearest_turf = turf.nearestPoint(targetPoint, points);
@@ -650,6 +680,9 @@ function locFunc(positions){
 
 	// Adding Overlay in control map
 	setTimeout(function() {
+		// if (navigator.online){
+		// 	map.setView([positions['lat'],positions['lng']], 16);
+		// }
 		map.setView([positions['lat'],positions['lng']], 16);
 		controlMap.addOverlay(ptsWithin.addTo(map),"pontos de altitude");
 	},1500);
@@ -662,9 +695,9 @@ function locFunc(positions){
 	setTimeout(function() {
 			controlMap.addOverlay(nearest.addTo(map),"ponto de altitude próximo");
 			last_feature(nearest).openPopup();
+      dem(pos);
 	},9000);
 
-	dem(pos);
 
 	setTimeout(function() {
 			controlMap.addOverlay(myPoint.addTo(map),"minha localização");

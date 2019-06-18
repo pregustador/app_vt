@@ -17,7 +17,7 @@ def home():
 def graphic():
     print("oi")
     if request.method == 'POST':
-        print("oi POST")
+        print("Request POST Ok")
         try:
             data = request.get_json()
             # data = json.loads(data)
@@ -40,15 +40,14 @@ def graphic():
             # ax.set_zlabel('Z')
             # plt.show()
 
-
             fig = plt.figure()
             ax = Axes3D(fig)
 
             def init():
                 # Plot the surface.
-                ax.plot_trisurf(triang, z, cmap='jet')
-                ax.scatter(x,y,z, marker='.', s=10, c="black", alpha=0.5)
-                ax.scatter(x[-1::],y[-1::],z[-1::], marker='o', s=20, c="red", alpha=0.7)
+                ax.plot_trisurf(triang, z, cmap='jet', alpha=0.8)
+                ax.scatter(x,y,z, marker='.', s=15, c="black", alpha=0.2)
+                ax.scatter(x[-1::],y[-1::],z[-1::], marker='*', s=40, c="black", alpha=0.9)
                 ax.set_xlabel('X')
                 ax.set_ylabel('Y')
                 ax.set_zlabel('Z')
@@ -57,20 +56,18 @@ def graphic():
             def animate(i):
                 # azimuth angle : 0 deg to 360 deg
                 # ax.view_init(elev=10, azim=i*4)
-                ax.view_init(elev=10, azim=i*4*3)
+                ax.view_init(elev=10, azim=i*4*5)
                 return fig,
 
             # Animate azim=i*4 frames=90 fps=30 interval=50
             ani = animation.FuncAnimation(fig, animate, init_func=init,
-                                            frames=30, interval=50, blit=True)
-            ani.save('tmp/imgdem.gif', writer='imagemagick', fps=10)
+                                            frames=18, interval=50, blit=True)
+            ani.save('tmp/imgdem.gif', writer='imagemagick', fps=6)
 
             # ani.save('tmp/imgdem_.mp4', fps=30)
             # ani = animation.FuncAnimation(fig, animate, init_func=init,interval=30)
             # writer = animation.writers['ffmpeg'](fps=30)
             # ani.save('tmp/imgdem.mp4',writer=writer,dpi=dpi)
-
-
 
             # buf = io.BytesIO()
             # fig.savefig(buf, format='png')
@@ -88,10 +85,10 @@ def graphic():
             return jsonify(html=uri)
 
         except:
-            print("oi except")
+            print("Not Work 1")
             return render_template_string("Not work")
     else:
-        print("oi else")
+        print("Not Work 2")
         return render_template_string("Not work")
 
 
@@ -118,6 +115,11 @@ def static_geojson_stabranca_pol():
 @app.route('/stabranca_district_pt.json', methods=['GET','POST'])
 def static_geojson_stabranca_pt():
     return app.send_static_file('stabranca_district_pt.json')
+
+################## service-worker route for pwa ###################
+@app.route('/sw.js', methods=['GET'])
+def sw():
+    return app.send_static_file('sw.js')
 
 
 # app.run(port=5000)
