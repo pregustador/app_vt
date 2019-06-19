@@ -9,6 +9,18 @@ if('serviceWorker' in navigator) {
         console.log("Service Worker Not Registered");
     }
 }
+// see: https://www.stefanjudis.com/blog/three-things-to-consider-before-your-progressive-web-app-goes-standalone/
+var baseRegex = new RegExp( `${ window.location.hostname}` );
+if ( window.matchMedia( '(display-mode: standalone)' ).matches ) {
+  window.addEventListener( 'click', function() {
+    if (
+      event.target.tagName === 'A' &&
+      ! baseRegex.test( event.target.href )
+    ){
+      document.getElementById( 'loading-indicator' ).classList.add( 'is-active' );
+    }
+  } );
+}
 
 
 // ------------- GLOBAL VARIABLES --------------------------------------------
@@ -39,7 +51,7 @@ var bounds = new L.LatLngBounds(new L.LatLng(-23.4482,-46.2100), new L.LatLng(-2
 var map = new L.Map('map', {
     measureControl: true,
   	center: bounds.getCenter(),
-  	zoom: 5,
+  	zoom: 10,
   	layers: [osm],
   	// maxBounds: bounds ... [osm]
 });

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
-    <meta name="theme-color" content="#4b4b4b">
+    <meta name="theme-color" content="#415942">
 
     <!--Leaflet referenced tags -->
     <link rel="stylesheet" href="../static/css/leaflet.css">
@@ -112,11 +112,44 @@
       <div id="info-top" class="div_content-top"><p class="paragraph_right"> Info &nbsp &nbsp</p></div>
       <div id="info-content" class="div_content-content">
         <center>
+          <a href="#dados_info"> DADOS, </a>
+          <a href="#via_info"> VIA, </a>
           <a href="#mde_info">MDE, </a>
-          <a href="#tin_info"> TIN, </a>
-          <a href="#via_info"> VIA </a>
+          <a href="#tin_info"> TIN. </a>
+
         </center>
         <br>
+        <hr>
+        <section id="dados_info">
+          <h3> DADOS </h3>
+          As amostras foram agrupadas de modo simples e aleatório e foram obtidos a partir de imagem
+          SRTM com dados de altitude do site topodata do INPE. Já o SIG utilizado para retirada
+          das amostras foi o Qgis.<br>
+          Cabe ressaltar que para se carregar os dados é necessário clicar no botão de carregamento
+          <img  height="15px" src="../static/css/images/baseline_cached_black_36dp.png" alt="img_cached">
+          e escolher a cidade com os seus respectivos pontos de altitude, de modo que é necessário carregar os
+          dados sempre que a localização do usuário mudar para outra cidade.
+        </section>
+        <hr>
+        <section id="via_info">
+          <h3> VIA </h3>
+          De acordo com o Instituto Brasileiro de Geografia e Estatística (<a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">
+          IBGE </a>), o perfil é a representação em termos cartográficos de uma seção vertical da superfície terrestre. Assim,
+          inicialmente precisa-se conhecer as altitudes de um determinado número de pontos e a distância entre eles. A figura 2
+          abaixo mostra a representação do perfil topográfico de acordo com uma seção traçada entre as curvas de nível:
+          <center>
+            <img  class="dem_via_img" src="../static/css/images/perfil_ibge.gif" alt="img_perfil_IBGE">
+            <!--end. img: https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/imagens/Image184.gif-->
+            <p></p>
+            Fonte-imagem: <a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">IBGE</a>
+          </center>
+          <h4> Como é gerado o Perfil aqui? </h4>
+          A ideia aqui é a geração da seção do perfil através do caminho percorrido pelo usuário por meio de suas coordenadas,
+          estas são fornecidas a cada 30 segundos pelo sistema de posicionamento do despositivo. Assim, ao se carregar a
+          base de dados previamente (ver explicação em DADOS) e clicar no botão
+          <img  height="15px" src="../static/css/images/baseline_my_location_black_36dp.png" alt="img_my_location">,
+          o usuário saberá qual foi a altitude de seus pontos de localização em comparação com a distância percorrida.
+        </section>
         <hr>
         <section id="mde_info">
           <h3> MDE </h3>
@@ -148,24 +181,25 @@
           </center>
         </section>
         <hr>
-
-        <section id="via_info">
-          <h3> VIA </h3>
-          De acordo com o Instituto Brasileiro de Geografia e Estatística (<a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">
-          IBGE </a>), o perfil é a representação em termos cartográficos de uma seção vertical da superfície terrestre. Assim,
-          inicialmente precisa-se conhecer as altitudes de um determinado número de pontos e a distância entre eles. A figura 2
-          abaixo mostra a representação do perfil topográfico de acordo com uma seção traçada entre as curvas de nível:
-          <center>
-            <img  class="dem_via_img" src="../static/css/images/perfil_ibge.gif" alt="img_perfil_IBGE">
-            <!--end. img: https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/imagens/Image184.gif-->
-            <p></p>
-            Fonte-imagem: <a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">IBGE</a>
-          </center>
-          <h4> Como é gerado o Perfil aqui? </h4>
-          A ideia é gerar a seção através do caminho percorrido pelo usuário por meio de suas coordenadas, estas são fornecidas
-          a cada 30 segundos pelo sistema de posicionamento do despositivo, clicando-se na ferramenta indicada (utilizar a
-          aba ajuda para saber como usar). Deste modo, o usuário saberá qual foi a altitude de seus pontos de localização em
-          comparação com a distância percorrida.
+        <section id="tin_info">
+          <h3> TIN </h3>
+          <h4> O que é ? </h4>
+          Segundo <a href="https://www.usgs.gov/faqs/what-difference-between-a-dem-and-a-dsm"> Neeraj
+          Bhargava, Ritu Bhargava e Prakash Singh Tanwar (2013) </a>, a Rede Triangular Irregular
+          (do inglês: TIN – <em> Tringular Irregular Network </em> ), baseada em vetor, nada mais é do que um
+          modo de representar uma superfície derivada de pontos de amostra espaçados irregularmente
+          e recursos de linha de quebra.
+          <h4> Como é gerado o TIN aqui ? </h4>
+          Em conjunto com a localização do usuário é gerado o TIN em duas dimensões (2D) e depois em três dimensões (3D),
+          isto ocorre ao se clicar previamente no botão de carregamento (ver explicação em DADOS) e depois no botão com simbologia
+          de alvo
+          <img  height="15px" src="../static/css/images/baseline_my_location_black_36dp.png" alt="img_my_location">
+          . Depois de um tempo a operação de retirada de amostras da base de dados é explicada em conjunto com o carregamento
+          das camadas no mapa, de modo que após de alguns segundos o usuário pode ver o gráfico em três dimensões (3D) de sua
+          localidade ao ir na aba TIN 3D. <br>
+          Ressalta-se que os pontos de amostra retirados são advindos de um buffer que terá em média o mesmo tamanho, de modo
+          que a Rede Triangular Irregular, tanto em 2D como em 3D, terá o ponto de altitude mais distante a 300m de distância
+          da localização do usuário.
         </section>
 
       </div>
