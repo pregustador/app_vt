@@ -3,7 +3,7 @@
 // fonte: https://github.com/GoogleChrome/samples/blob/gh-pages/service-worker/prefetch/service-worker.js
 // Other example pre-cached... if I want to put just the updated data, just comment the others and refresh
 
-var CACHE_VERSION = 3;
+var CACHE_VERSION = 4;
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };

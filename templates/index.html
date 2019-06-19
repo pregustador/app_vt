@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
+    <!--Theme Color-->
     <meta name="theme-color" content="#415942">
 
     <!--Leaflet referenced tags -->
@@ -39,7 +40,6 @@
     <!-- <script crossorigin src="https://unpkg.com/react-plotly.js@2.2.0/dist/create-plotly-component.js"></script> -->
     <script src="../static/js/create-plotly-component.js"></script>
 
-
     <!--Main CSS-->
     <link rel="stylesheet" href="../static/css/main.css">
 
@@ -50,7 +50,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <!--Title website/pwa-->
-    <title>TG_PROJETO</title>
+    <title>APP-VT</title>
 
   </head>
   <body>
@@ -63,7 +63,7 @@
         <span class="div_dem div_navbar-group-content">TIN 3D</span>
         <span class="div_path div_navbar-group-content">VIA</span>
         <span class="div_info div_navbar-group-content">INFO</span>
-        <span class="div_navbar-group-content">FONTE</span>
+        <a href="https://github.com/pregustador/app_vt" style="text-decoration:none; color:black"><span class="div_navbar-group-content">&nbsp &nbsp FONTE</span></a>
       </div>
     </div>
 
@@ -83,7 +83,7 @@
       <div class="div_dem div_sidebar-group-content">&nbsp &nbsp TIN 3D</div>
       <div class="div_path div_sidebar-group-content">&nbsp &nbsp VIA</div>
       <div class="div_info div_sidebar-group-content">&nbsp &nbsp INFO</div>
-      <div class="div_sidebar-group-content">&nbsp &nbsp FONTE</div>
+      <a href="https://github.com/pregustador/app_vt" style="text-decoration:none; color:black"><div class="div_sidebar-group-content">&nbsp &nbsp FONTE</div></a>
     </div>
 
     <!--Menu buttom-->
@@ -135,7 +135,7 @@
           <h3> VIA </h3>
           De acordo com o Instituto Brasileiro de Geografia e Estatística (<a href="https://ww2.ibge.gov.br/home/geociencias/cartografia/manual_nocoes/elementos_representacao.html">
           IBGE </a>), o perfil é a representação em termos cartográficos de uma seção vertical da superfície terrestre. Assim,
-          inicialmente precisa-se conhecer as altitudes de um determinado número de pontos e a distância entre eles. A figura 2
+          inicialmente precisa-se conhecer as altitudes de um determinado número de pontos e a distância entre eles. A Figura 1
           abaixo mostra a representação do perfil topográfico de acordo com uma seção traçada entre as curvas de nível:
           <center>
             <img  class="dem_via_img" src="../static/css/images/perfil_ibge.gif" alt="img_perfil_IBGE">
@@ -171,7 +171,7 @@
           Anderson Medeiros</a>, utlizamos o conceito do MDE e MDT (Modelo Digital de Terreno,
           ou do inglês: <em>Digital Terrain Model</em> - DTM) como sinônimos.
           <p>
-          A Figura 1 a seguir ilustra a diferença entre os modelos DEM e DSM:
+          A Figura 2 a seguir ilustra a diferença entre os modelos DTM e DSM:
           </p>
           <p></p>
           <center>
@@ -195,7 +195,7 @@
           de alvo
           <img  height="15px" src="../static/css/images/baseline_my_location_black_36dp.png" alt="img_my_location">
           . Depois de um tempo a operação de retirada de amostras da base de dados é explicada em conjunto com o carregamento
-          das camadas no mapa, de modo que após de alguns segundos o usuário pode ver o gráfico em três dimensões (3D) de sua
+          das camadas no mapa, de modo que após alguns segundos o usuário pode ver o gráfico em três dimensões (3D) de sua
           localidade ao ir na aba TIN 3D. <br>
           Ressalta-se que os pontos de amostra retirados são advindos de um buffer que terá em média o mesmo tamanho, de modo
           que a Rede Triangular Irregular, tanto em 2D como em 3D, terá o ponto de altitude mais distante a 300m de distância
