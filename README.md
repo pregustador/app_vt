@@ -16,5 +16,5 @@ aplicação a tela principal do despositivo.
 
 ## Implementação
 
-Este projeto é parte integrante do trabalho de conlusão do curso de Geoprocessamento da Fatec Jacareí, feito por Fernando Azevedo Silva com orientação do professor Me. Clóvis Lemos Tavares e co-orientação do
+Este projeto é parte integrante do trabalho de conclusão do curso de Geoprocessamento da Fatec Jacareí, feito por Fernando Azevedo Silva com orientação do professor Me. Clóvis Lemos Tavares e co-orientação do
 Me. Adilson Rodolfo Neves.
