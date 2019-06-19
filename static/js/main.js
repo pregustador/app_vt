@@ -10,17 +10,17 @@ if('serviceWorker' in navigator) {
     }
 }
 // see: https://www.stefanjudis.com/blog/three-things-to-consider-before-your-progressive-web-app-goes-standalone/
-var baseRegex = new RegExp( `${ window.location.hostname}` );
-if ( window.matchMedia( '(display-mode: standalone)' ).matches ) {
-  window.addEventListener( 'click', function() {
-    if (
-      event.target.tagName === 'A' &&
-      ! baseRegex.test( event.target.href )
-    ){
-      document.getElementById( 'loading-indicator' ).classList.add( 'is-active' );
-    }
-  } );
-}
+// var baseRegex = new RegExp( `${ window.location.hostname}` );
+// if ( window.matchMedia( '(display-mode: standalone)' ).matches ) {
+//   window.addEventListener( 'click', function() {
+//     if (
+//       event.target.tagName === 'A' &&
+//       ! baseRegex.test( event.target.href )
+//     ){
+//       document.getElementById( 'loading-indicator' ).classList.add( 'is-active' );
+//     }
+//   } );
+// }
 
 
 // ------------- GLOBAL VARIABLES --------------------------------------------
