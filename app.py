@@ -100,6 +100,14 @@ def static_geojson_sjc_sjc_pol():
 def static_geojson_sjc_sjc_pt():
     return app.send_static_file('sjc_sjc_district_pt.json')
 
+@app.route('/sjc_em_district_pol.json', methods=['GET','POST'])
+def static_geojson_sjc_em_pol():
+    return app.send_static_file('sjc_em_district_pol.json')
+
+@app.route('/sjc_em_district_pt.json', methods=['GET','POST'])
+def static_geojson_sjc_em_pt():
+    return app.send_static_file('sjc_em_district_pt.json')
+
 @app.route('/jac_district_pol.json', methods=['GET','POST'])
 def static_geojson_jac_pol():
     return app.send_static_file('jac_district_pol.json')

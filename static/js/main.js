@@ -150,6 +150,7 @@ var change_data_select =
 					"<select>"+
 						"<option name='cities' value='jac'>Jacareí</option>"+
 						"<option name='cities' value='sjc_sjc'>São José dos Campos</option>"+
+						"<option name='cities' value='sjc_em'>São José dos Campos E. Mello</option>"+
 						"<option name='cities' value='stb'>Santa Branca</option>"+
 						"<input type='submit' onclick='chooseData()' value='carregar' />"+
 					"</select>"+
@@ -487,6 +488,11 @@ function grabDataCity(city) {
 		url_city_pol = "/sjc_sjc_district_pol.json";
 		url_city_pt = "/sjc_sjc_district_pt.json";
 		city_name = "São José dos Campos"
+	}
+  if (city=='sjc_em') {
+		url_city_pol = "/sjc_em_district_pol.json";
+		url_city_pt = "/sjc_em_district_pt.json";
+		city_name = "São José dos Campos E. Mello"
 	}
 	if (city=='stb') {
 		url_city_pol = "/stabranca_district_pol.json";
