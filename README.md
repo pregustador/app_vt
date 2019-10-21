@@ -5,9 +5,9 @@ Terreno.
 
 ## Objetivo
 
-Funcionar como uma ferramenta pedagógica simples auxiliar para os interessados
-em geotecnologias entenderem certos conceitos de geoespacialização e
-modelagem de terreno.
+Funcionar como uma ferramenta simples para os interessados em
+geotecnologias entenderem certos conceitos de modelagem de terreno
+por meio de sua representação por Rede Triangular Irregular.
 
 ## Instalação
 
