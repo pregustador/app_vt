@@ -4,8 +4,6 @@ import matplotlib.tri as mtri
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 import urllib, base64
-# from matplotlib import cm
-# import io
 
 app = Flask(__name__)
 
@@ -15,9 +13,9 @@ def home():
 
 @app.route('/output_dem', methods=['GET','POST']) # if we not putting method the default is GET
 def graphic():
-    print("oi")
+    # print("ok")
     if request.method == 'POST':
-        print("Request POST Ok")
+        #print("Request POST Ok")
         try:
             data = request.get_json()
             # data = json.loads(data)
@@ -26,19 +24,6 @@ def graphic():
             z = [float(x) for x in data["elev"]]
 
             triang = mtri.Triangulation(x,y)
-
-             # Get instance of Axis3D
-            # fig = plt.figure()
-
-            # ax = fig.gca(projection='3d')
-
-            # ax.plot_trisurf(triang, z, cmap='jet')
-            # ax.scatter(x,y,z, marker='.', s=10, c="black", alpha=0.5)
-            # ax.view_init(elev=20, azim=-45)
-            # ax.set_xlabel('X')
-            # ax.set_ylabel('Y')
-            # ax.set_zlabel('Z')
-            # plt.show()
 
             fig = plt.figure()
             ax = Axes3D(fig)
@@ -55,7 +40,6 @@ def graphic():
 
             def animate(i):
                 # azimuth angle : 0 deg to 360 deg
-                # ax.view_init(elev=10, azim=i*4)
                 ax.view_init(elev=10, azim=i*4*5)
                 return fig,
 
@@ -63,18 +47,6 @@ def graphic():
             ani = animation.FuncAnimation(fig, animate, init_func=init,
                                             frames=18, interval=50, blit=True)
             ani.save('tmp/imgdem.gif', writer='imagemagick', fps=6)
-
-            # ani.save('tmp/imgdem_.mp4', fps=30)
-            # ani = animation.FuncAnimation(fig, animate, init_func=init,interval=30)
-            # writer = animation.writers['ffmpeg'](fps=30)
-            # ani.save('tmp/imgdem.mp4',writer=writer,dpi=dpi)
-
-            # buf = io.BytesIO()
-            # fig.savefig(buf, format='png')
-            # buf.seek(0)
-            # string = base64.b64encode(buf.read())
-            # uri = urllib.parse.quote(string)
-            # return jsonify(html=uri)
 
             image = open('tmp/imgdem.gif', 'rb') #open binary file in read mode
             # image = open('tmp/imgdem.mp4', 'rb') #open binary file in read mode
@@ -128,10 +100,6 @@ def static_geojson_stabranca_pt():
 @app.route('/sw.js', methods=['GET'])
 def sw():
     return app.send_static_file('sw.js')
-
-
-# app.run(port=5000)
-# app.run(host='0.0.0.0')
 
 # It's just to work https
 if __name__ == "__main__":
