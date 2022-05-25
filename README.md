@@ -12,7 +12,7 @@ por meio de sua representação por Rede Triangular Irregular.
 ## Instalação
 
 Como um PWA (Progressive Web Aplication) comum é necessário adicionar a
-aplicação a tela principal do despositivo.
+aplicação a tela principal do dispositivo.
 
 ## Implementação
 
